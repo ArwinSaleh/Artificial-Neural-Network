@@ -1,5 +1,4 @@
 import numpy as np
-import pandas as pnd
 
 x1_temp = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 1, 1, 1, 1, -1, -1, -1, -1, -1, 1, 1, 1, 1, 1, 1, -1, -1,
            -1, 1, 1, 1, -1, -1, 1, 1, 1, -1, -1, 1, 1, 1, -1, -1, 1, 1, 1, -1, -1, 1, 1, 1, -1, -1, 1, 1, 1, -1, -1, 1,
@@ -68,25 +67,24 @@ def which_pattern(state):
 
 
 def generate_weight():
-    W = np.zeros((N, N))  # Generates an NxN-matrix of zeros
+    weight_matrix = np.zeros((N, N))  # Generates an NxN-matrix of zeros
     patterns = np.matrix([x1_temp, x2_temp, x3_temp, x4_temp, x5_temp]).T
 
     for i in range(0, 5):
-        W = W + np.dot(patterns[:, i], (np.transpose(patterns[:, i])))
-    W = W / N
-    np.fill_diagonal(W, 0)
+        weight_matrix = weight_matrix + np.dot(patterns[:, i], (np.transpose(patterns[:, i])))
+    weight_matrix = weight_matrix / N
+    np.fill_diagonal(weight_matrix, 0)
 
-    return W
+    return weight_matrix
 
 
 def print_result(state):
     state = np.reshape(state, (16, 10))
-    state.shape
     print(repr(state))
 
 
 def main(feed_pattern):
-    W = generate_weight()
+    weights = generate_weight()
     convergence = 0
 
     last_state = feed_pattern
@@ -96,7 +94,7 @@ def main(feed_pattern):
         next_state = last_state
 
         for i in range(0, N):
-            next_state[i] = sgn((1 / N) * np.dot(W[i, :], next_state))
+            next_state[i] = sgn((1 / N) * np.dot(weights[i, :], next_state))
 
         if next_state.all() == last_state.all():
             convergence = 1
@@ -150,4 +148,7 @@ def task3():
     print_result(res)
     which_pattern(res)
 
+
 task3()
+
+# TESTING
