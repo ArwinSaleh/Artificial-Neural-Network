@@ -1,4 +1,5 @@
 import numpy as np
+import matplotlib.pyplot as plt
 
 x1_temp = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, 1, 1, 1, 1, -1, -1, -1, -1, -1, 1, 1, 1, 1, 1, 1, -1, -1,
            -1, 1, 1, 1, -1, -1, 1, 1, 1, -1, -1, 1, 1, 1, -1, -1, 1, 1, 1, -1, -1, 1, 1, 1, -1, -1, 1, 1, 1, -1, -1, 1,
@@ -42,7 +43,7 @@ x5_temp = [-1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -
            -1, -1, -1, -1, -1, -1, -1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1, 1, 1, -1,
            -1, -1, -1, -1, -1, -1, -1, 1, 1, -1]
 
-N = np.size(x1_temp)
+N = 160
 
 
 def sgn(i):  # This method is used to define the signum function at signum(0).
@@ -83,18 +84,24 @@ def print_result(state):
     print(repr(state))
 
 
+def plot_result(state):
+    state = np.reshape(state, (16, 10))
+    plt.imshow(state, cmap="gray")
+    plt.show()
+
+
 def main(feed_pattern):
     weights = generate_weight()
     convergence = 0
 
     last_state = feed_pattern
+    next_state = last_state
+    twice = 2
 
     while convergence == 0:
-
-        next_state = last_state
-
-        for i in range(0, N):
-            next_state[i] = sgn((1 / N) * np.dot(weights[i, :], next_state))
+        for n in range(twice):
+            for i in range(0, N):
+                next_state[i] = sgn((1 / N) * np.dot(weights[i, :], next_state))
 
         if next_state.all() == last_state.all():
             convergence = 1
@@ -117,6 +124,7 @@ def task1():
     res = main(feed1a)
     print_result(res)
     which_pattern(res)
+    plot_result(res)
 
 
 def task2():
@@ -132,6 +140,7 @@ def task2():
     res = main(feed2a)
     print_result(res)
     which_pattern(res)
+    plot_result(res)
 
 
 def task3():
@@ -147,8 +156,7 @@ def task3():
     res = main(feed3a)
     print_result(res)
     which_pattern(res)
+    plot_result(res)
 
 
-task3()
-
-# TESTING
+task1()
