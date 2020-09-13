@@ -43,6 +43,8 @@ x5_temp = [-1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1, 1, 1, -1, -1, -1, -1, 1, 1, -
            -1, -1, -1, -1, -1, -1, -1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1, 1, 1, -1,
            -1, -1, -1, -1, -1, -1, -1, 1, 1, -1]
 
+x_patterns = [x1_temp, x2_temp, x3_temp, x4_temp, x5_temp]
+
 N = 160
 
 
@@ -67,18 +69,6 @@ def which_pattern(state):
         print("The pattern corresponds to number 4")
 
 
-def generate_weight():
-    weight_matrix = np.zeros((N, N))  # Generates an NxN-matrix of zeros
-    patterns = np.matrix([x1_temp, x2_temp, x3_temp, x4_temp, x5_temp]).T
-
-    for i in range(0, 5):
-        weight_matrix = weight_matrix + np.dot(patterns[:, i], (np.transpose(patterns[:, i])))
-    weight_matrix = weight_matrix / N
-    np.fill_diagonal(weight_matrix, 0)
-
-    return weight_matrix
-
-
 def print_result(state):
     state = np.reshape(state, (16, 10))
     print(repr(state))
@@ -90,23 +80,35 @@ def plot_result(state):
     plt.show()
 
 
-def main(feed_pattern):
-    weights = generate_weight()
+def generate_weight(undisturbed_patterns):
+    weight_matrix = np.zeros((N, N))  # Generates an NxN-matrix of zeros
+    patterns = np.matrix(undisturbed_patterns).T
+
+    for i in range(0, len(x_patterns)):
+        weight_matrix = weight_matrix + np.dot(patterns[:, i], (np.transpose(patterns[:, i])))
+    weight_matrix = weight_matrix / N
+    np.fill_diagonal(weight_matrix, 0)
+
+    return weight_matrix
+
+
+def main(feed_pattern, undisturbed_patterns):
+    weights = generate_weight(undisturbed_patterns)
+    next_state = feed_pattern
     convergence = 0
 
-    last_state = feed_pattern
-    next_state = last_state
-    twice = 2
-
     while convergence == 0:
-        for n in range(twice):
-            for i in range(0, N):
-                next_state[i] = sgn((1 / N) * np.dot(weights[i, :], next_state))
 
-        if next_state.all() == last_state.all():
-            convergence = 1
-        else:
-            last_state = next_state
+        for i in range(0, N):
+            next_state[i] = sgn((1 / N) * np.dot(weights[i], next_state))
+
+        for k in x_patterns:
+            error = 0
+            for j in range(0, N):
+                if next_state[j] != k[j]:
+                    error = error + 1
+            if error == 0:
+                convergence = 1
 
     return next_state
 
@@ -121,7 +123,7 @@ def task1():
                    -1, -1, -1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, 1, 1, 1, 1, -1, -1, -1,
                    -1, -1, -1, 1, 1, 1, 1, -1, -1, -1, -1, -1, -1, 1, 1, 1, 1, -1, -1, -1]
     feed1a = np.transpose(feed1a_temp)
-    res = main(feed1a)
+    res = main(feed1a, x_patterns)
     print_result(res)
     which_pattern(res)
     plot_result(res)
@@ -137,7 +139,7 @@ def task2():
                    -1, -1, -1, -1, -1, -1, -1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1, 1, 1, -1,
                    -1, -1, -1, -1, -1, -1, -1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1, 1, 1, -1]
     feed2a = np.transpose(feed2a_temp)
-    res = main(feed2a)
+    res = main(feed2a, x_patterns)
     print_result(res)
     which_pattern(res)
     plot_result(res)
@@ -153,10 +155,11 @@ def task3():
                    -1, -1, -1, -1, -1, -1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, 1, 1, -1,
                    -1, -1, 1, 1, 1, 1, 1, 1, 1, -1, 1, 1, -1, -1, -1, -1, -1, -1, 1, 1]
     feed3a = np.transpose(feed3a_temp)
-    res = main(feed3a)
+    res = main(feed3a, x_patterns)
     print_result(res)
     which_pattern(res)
     plot_result(res)
 
-
-task1()
+#task1()    # UNCOMMENT TO TEST FOR TASK1
+#task2()    # UNCOMMENT TO TEST FOR TASK2
+#task3()    # UNCOMMENT TO TEST FOR TASK3
