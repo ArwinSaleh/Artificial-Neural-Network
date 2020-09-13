@@ -70,6 +70,14 @@ feed3a_temp = [1, 1, -1, -1, -1, -1, -1, -1, 1, 1, -1, -1, 1, 1, 1, 1, 1, 1, 1, 
                -1, -1, -1, -1, -1, -1, 1, 1, 1, -1, -1, -1, -1, -1, -1, -1, 1, 1, 1, -1,
                -1, -1, 1, 1, 1, 1, 1, 1, 1, -1, 1, 1, -1, -1, -1, -1, -1, -1, 1, 1]
 
+test = [-1, -1, -1, -1, -1, -1, -1, -1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, 1, 1,
+        1, 1, 1, 1, 1, -1, -1, -1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, 1, 1, 1, 1, 1, 1,
+        1, -1, -1, -1, 1, 1,
+        -1, -1, -1, -1, -1, -1, -1, -1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1, 1, 1, -1, -1, -1, 1, 1, 1, 1, 1, 1, 1, -1,
+        -1, -1, 1, 1, 1, 1, 1, 1, 1,
+        -1, -1, -1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1, 1, 1, 1, 1, 1, 1, 1, -1, -1, -1,
+        -1, -1, -1, -1, -1, 1, 1, -1, -1, -1, -1, -1, -1, -1, -1, 1, 1]
+
 x_patterns = [x1_temp, x2_temp, x3_temp, x4_temp, x5_temp]
 
 N = 160
@@ -110,20 +118,24 @@ def main(feed_pattern, undisturbed_patterns):
     weights = generate_weight(undisturbed_patterns)
     state = feed_pattern
     convergence = 0
-
+    steady_patterns = x_patterns
     while convergence == 0:
 
         for i in range(0, N):
             state[i] = sgn((1 / N) * np.dot(weights[i], state))
 
-        for steady_state in x_patterns:  # We test to see if the state has converged to one of the steady ones.
+        for steady_state in steady_patterns:  # We test to see if the state
+            # has converged to one of the steady ones.
             error = 0
             for j in range(0, N):
                 if state[j] != steady_state[j]:  # We compare each element of the state to the steady-state elements
                     error = error + 1
+
             if error == 0:  # If true, then the state is equal to one of the steady-states and we are done.
                 convergence = 1
 
+            if convergence == 0:  # We account for the inverse of all patterns as well.
+                steady_patterns = np.dot(-1, steady_patterns)
     return state
 
 
@@ -147,6 +159,15 @@ def task3():
     print_result(res)
     plot_result(res)
 
+
+def test_inverse():
+    feed = np.transpose(test)
+    res = main(feed, x_patterns)
+    print(res)
+    plot_result(res)
+
 #task1()    # UNCOMMENT TO TEST FOR TASK1
 #task2()    # UNCOMMENT TO TEST FOR TASK2
 #task3()    # UNCOMMENT TO TEST FOR TASK3
+
+#test_inverse()
