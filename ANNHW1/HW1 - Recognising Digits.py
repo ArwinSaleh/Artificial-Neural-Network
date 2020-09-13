@@ -85,7 +85,7 @@ def sgn(i):  # This method is used to define the signum function at signum(0).
 
 def print_result(state):
     state = np.reshape(state, (16, 10))
-    print(repr(state))
+    print(repr(state))  # This prints out the result in a format that openTA accepts.
 
 
 def plot_result(state):
@@ -108,23 +108,23 @@ def generate_weight(undisturbed_patterns):
 
 def main(feed_pattern, undisturbed_patterns):
     weights = generate_weight(undisturbed_patterns)
-    next_state = feed_pattern
+    state = feed_pattern
     convergence = 0
 
     while convergence == 0:
 
         for i in range(0, N):
-            next_state[i] = sgn((1 / N) * np.dot(weights[i], next_state))
+            state[i] = sgn((1 / N) * np.dot(weights[i], state))
 
-        for k in x_patterns:
+        for steady_state in x_patterns:  # We test to see if the state has converged to one of the steady ones.
             error = 0
             for j in range(0, N):
-                if next_state[j] != k[j]:
+                if state[j] != steady_state[j]:  # We compare each element of the state to the steady-state elements
                     error = error + 1
-            if error == 0:
+            if error == 0:  # If true, then the state is equal to one of the steady-states and we are done.
                 convergence = 1
 
-    return next_state
+    return state
 
 
 def task1():
