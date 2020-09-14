@@ -31,31 +31,31 @@ def generate_patterns(p):
 def generate_weight(p, patterns):
     w_matrix = np.zeros((N, N))
 
-    for i in range(p):
+    for i in range(0, p):
         w_matrix = w_matrix + np.dot(np.transpose(np.array([patterns[:, i]])), np.array([patterns[:, i]]))
 
-    w_matrix = w_matrix / N
     np.fill_diagonal(w_matrix, 0)
+    w_matrix = w_matrix / N
 
     return w_matrix
 
 
-def main(p_matrix, w_matrix):
-    m_u = []  # Order parameter
+def main(p):
+    m_u = np.zeros(reps)  # Order parameter
+
     for i in range(0, reps):
+        p_matrix = generate_patterns(p)
+        w_matrix = generate_weight(p, p_matrix)
 
-        last_state = p_matrix[:, 1]
-        iterations = np.zeros(reps)
-
+        last_state = p_matrix[:, 0]  # pattern index = 1 => index = 0 in python
+        iterations = np.zeros(T)
+        next_state = last_state
         for j in range(0, T):
-            next_state = last_state
-
-            m = rnd.randint(0, N)  # Choose neuron randomly
+            m = rnd.randint(0, N - 1)  # Choose neuron randomly
             b_m = np.dot(w_matrix[m, :], last_state)
             p_b = sigmoid(b_m)
-
             next_state[m] = random_number_dist(1, -1, p_b, 1 - p_b)
-            iterations[j] = (1 / N) * p_matrix[:, 1] * np.transpose(next_state)
+            iterations[j] = (1 / N) * np.dot(p_matrix[:, 0], np.transpose(next_state))
             last_state = next_state
 
         m_u[i] = (1 / T) * sum(iterations)
@@ -67,17 +67,15 @@ def main(p_matrix, w_matrix):
 
 def task1():
     p = 7
-    p_matrix = generate_patterns(p)
-    w_matrix = generate_weight(p, p_matrix)
-    res = main(p_matrix, w_matrix)
+    res = main(p)
     print(res)
 
 
 def task2():
     p = 45
-    p_matrix = generate_patterns(p)
-    w_matrix = generate_weight(p, p_matrix)
-    res = main(p_matrix, w_matrix)
+    res = main(p)
+    print(res)
+
 
 task1()
 # task2()
