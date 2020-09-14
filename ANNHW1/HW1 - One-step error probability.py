@@ -17,14 +17,14 @@ def main(boolean):
             p_input = rnd.randint(0, i)
             m = rnd.randint(0, N - 1)
 
-            w_ij = (1 / N) * np.dot(p[m, :], np.conj(p).T)
+            w_matrix = (1 / N) * np.dot(p[m, :], np.conj(p).T)
 
             if boolean == 1:  # Choose task
-                w_ij[m] = 0  # This is the only real difference between the two tasks,
+                w_matrix[m] = 0  # This is the only real difference between the two tasks,
                 # we set the weights to zero for the first task.
 
             s_0 = sgn(p[m, p_input - 1])
-            s_1 = sgn(np.dot(w_ij, p[:, p_input - 1]))
+            s_1 = sgn(np.dot(w_matrix, p[:, p_input - 1]))
 
             if s_0 != s_1:
                 nr_errors = nr_errors + 1
@@ -59,5 +59,5 @@ def task1a():
 def task1b():
     print(main(0))
 
-# task1a()   # UNCOMMENT FOR RESULT FROM TASK 1A
-# task1b()   # UNCOMMENT FOR RESULT FROM TASK 1B
+#task1a()   # UNCOMMENT FOR RESULT FROM TASK 1A
+#task1b()   # UNCOMMENT FOR RESULT FROM TASK 1B
