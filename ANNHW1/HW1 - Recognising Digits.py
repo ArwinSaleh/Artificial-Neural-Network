@@ -187,8 +187,8 @@ def test_inverse():
     plot_result(res)
 
 
-task1()  # UNCOMMENT TO TEST FOR TASK1
+#task1()  # UNCOMMENT TO TEST FOR TASK1
 #task2()  # UNCOMMENT TO TEST FOR TASK2
-#task3()  # UNCOMMENT TO TEST FOR TASK3
+task3()  # UNCOMMENT TO TEST FOR TASK3
 
-#test_inverse()
+test_inverse()

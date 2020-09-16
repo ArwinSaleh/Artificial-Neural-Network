@@ -32,7 +32,7 @@ def generate_weight(p, patterns):
     w_matrix = np.zeros((N, N))
 
     for i in range(0, p):
-        w_matrix = w_matrix + np.dot(np.transpose(np.array([patterns[:, i]])), np.array([patterns[:, i]]))
+        w_matrix = w_matrix + np.transpose(np.array([patterns[:, i]])) @ np.array([patterns[:, i]])
 
     np.fill_diagonal(w_matrix, 0)
     w_matrix = w_matrix / N

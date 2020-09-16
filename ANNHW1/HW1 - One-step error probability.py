@@ -59,5 +59,5 @@ def task1a():
 def task1b():
     print(main(0))
 
-#task1a()   # UNCOMMENT FOR RESULT FROM TASK 1A
+task1a()   # UNCOMMENT FOR RESULT FROM TASK 1A
 #task1b()   # UNCOMMENT FOR RESULT FROM TASK 1B
