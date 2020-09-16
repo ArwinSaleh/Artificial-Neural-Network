@@ -1,8 +1,5 @@
 import numpy as np
 import random as rnd
-import tensorflow as tf
-
-sess = tf.Session(config=tf.ConfigProto(log_device_placement=True))
 
 N = 200
 T = 2 * 10 ** 5
@@ -37,7 +34,7 @@ def generate_weight(p, patterns):
     for i in range(0, p):
         w_matrix = w_matrix + np.dot(np.transpose(np.array([patterns[:, i]])), np.array([patterns[:, i]]))
 
-    np.fill_diagonal(w_matrix, 0)   # To prevent shadow-copying
+    np.fill_diagonal(w_matrix, 0)
     w_matrix = w_matrix / N
 
     return w_matrix
@@ -49,7 +46,7 @@ def main(p):
         p_matrix = generate_patterns(p)
         w_matrix = generate_weight(p, p_matrix)
 
-        last_state = np.copy(p_matrix[:, 0])  # pattern index = 1 => index = 0 in python
+        last_state = np.copy(p_matrix[:, 0])  # To prevent shadow-copying we use np.copy
         iterations = np.zeros(T)
 
         for j in range(0, T):
@@ -80,5 +77,5 @@ def task2():
     print(res)
 
 
-task1()
-# task2()
+#task1()
+task2()

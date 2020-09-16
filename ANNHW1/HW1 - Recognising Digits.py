@@ -170,4 +170,4 @@ def test_inverse():
 #task2()    # UNCOMMENT TO TEST FOR TASK2
 #task3()    # UNCOMMENT TO TEST FOR TASK3
 
-#test_inverse()
+test_inverse()
