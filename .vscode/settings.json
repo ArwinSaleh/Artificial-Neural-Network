@@ -9,6 +9,5 @@
     "python.testing.pytestEnabled": false,
     "python.testing.nosetestsEnabled": false,
     "python.testing.unittestEnabled": true,
-    "python.pythonPath": "C:\\Users\\arwin\\AppData\\Local\\Programs\\Python\\Python38\\python.exe",
     "python.linting.enabled": false
 }
