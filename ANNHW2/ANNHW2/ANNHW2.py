@@ -9,3 +9,4 @@ print("TEST")
 print("TEST IGEN")
 
 print("wohooooo")
+print("lol")
