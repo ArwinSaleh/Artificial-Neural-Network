@@ -60,6 +60,7 @@ def main():
     theta = np.random.uniform(-1, 1)    # Threshold
 
     H = energy_function(theta, weights, x)
+    print(H)
 
 
 
