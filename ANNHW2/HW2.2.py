@@ -48,8 +48,8 @@ class StochasticGradientDescent:
 
 
     def train(self):
-        self.theta = self.theta - 0.02 * self.d_theta
-        self.W = self.W + (0.02 * np.dot(self.d_theta, self.X).T)
+        self.theta = self.theta - self.n * self.d_theta
+        self.W = self.W + (self.n * np.dot(self.d_theta, self.X).T)
 
 
     def generate_b(self):
@@ -97,7 +97,7 @@ def generate_threshold():
 def main():
 
     structure = StochasticGradientDescent()
-    maximum_iterations = 10**5
+    maximum_iterations = 10**3
     u_range = 16
 
     function_names = ['A', 'B', 'C', 'D', 'E', 'F']
