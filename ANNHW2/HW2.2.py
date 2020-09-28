@@ -18,8 +18,6 @@ x_data_temp = [x_1, x_2, x_3, x_4]
 
 X_data = np.asmatrix(x_data_temp).transpose()
 
-
-
 t_A = [1, 1, 1, -1, -1, 1, -1, -1, 1, 1, -1, 1, 1, -1, -1, -1]
 t_B = [-1, -1, 1, 1, 1, -1, -1, -1, -1, 1, 1, -1, 1, 1, 1, -1]
 t_C = [1, 1, 1, -1, 1, 1, 1, 1, -1, -1, -1, -1, 1, 1, -1, -1]
@@ -41,17 +39,17 @@ class StochasticGradientDescent:
         self.X = np.zeros((4,1))
         self.O = np.zeros((16, 1))
         self.T = np.zeros((16, 1))
-        self.err = 0
+        self.d_theta = 0
         
 
-    def error(self, u):
-        error = (self.T[u] - 0.5 * self.O[u] * self.g_prime())
-        self.err = error.item()
+    def delta_theta(self, u):
+        d_theta_temp = (self.T[u] - 0.5 * self.O[u] * self.g_prime())
+        self.d_theta = d_theta_temp.item()
 
 
     def train(self):
-        self.theta = self.theta - 0.02 * self.err
-        self.W = self.W + (0.02 * np.array(self.err * self.X)).T
+        self.theta = self.theta - 0.02 * self.d_theta
+        self.W = self.W + (0.02 * (self.d_theta * self.X).T)
 
 
     def generate_b(self):
@@ -77,11 +75,16 @@ class StochasticGradientDescent:
         output[output == 0] = 1
         output = np.sign(output)
 
-        if output.all() == self.T.all():
+        tmp = 0
+        for i in range(0, 16):
+            if output[i] == self.T[i]:
+                tmp = tmp + 1
+        if tmp == 16:
             return True
-    
         else:
             return False
+
+
 
 def generate_weights():
     weights = np.random.uniform(-0.2, 0.2, (4, 1))
@@ -107,8 +110,7 @@ def main():
     name_index = 0
 
     for t in T_data:  # We go through each input-pattern
-        structure.T = t.copy()
-        linearly_separable = False
+        structure.T = np.asmatrix(t).copy()
         current_boolean_function = function_names[name_index]
         structure.T = t.copy()
 
@@ -117,40 +119,37 @@ def main():
             for j in range(0, maximum_iterations):
 
                 for u in range(0, u_range):
-                    structure.X = X_data[u, :]
+                    structure.X = np.asarray(X_data[u, :])
                     structure.output(u)
-                    structure.error(u)
+                    structure.delta_theta(u)
                     structure.train()
+ 
 
-                linearly_separable = structure.linearly_separable()
-
-                if linearly_separable:
+                if structure.linearly_separable():
                     
-                    print("The following boolean function is linearly separable: " + current_boolean_function)
+                    print("\n" + "The following boolean function is linearly separable: " + current_boolean_function)
                     linearly_separable_list.append(current_boolean_function)
                     break
                 
             
-            if linearly_separable:
+            if structure.linearly_separable():
                 break
             else:
-                print("The following boolean function is NOT linearly separable: " + current_boolean_function)
+                print("\n" + "The following boolean function is NOT linearly separable: " + current_boolean_function)
             
-            name_index = name_index + 1
+            
 
-            print("Try number: " + str(j + 1))
+            print("\n" + "Retry " + str(i + 1) + ":")
             structure.__init__()
             structure.T = t.copy()
 
+        name_index = name_index + 1
+
         structure.__init__()
 
-    print("The following functions are linearly separable: " + str(linearly_separable_list))
-
+    print("\n" + "The following functions are linearly separable: " + str(linearly_separable_list))
 
 main()
-
-
-        
 
 
 
