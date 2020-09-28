@@ -43,13 +43,13 @@ class StochasticGradientDescent:
         
 
     def delta_theta(self, u):
-        d_theta_temp = (self.T[u] - 0.5 * self.O[u] * self.g_prime())
+        d_theta_temp = (self.T[u] - 0.5 * np.dot(self.O[u], self.g_prime()))
         self.d_theta = d_theta_temp.item()
 
 
     def train(self):
         self.theta = self.theta - 0.02 * self.d_theta
-        self.W = self.W + (0.02 * (self.d_theta * self.X).T)
+        self.W = self.W + (0.02 * np.dot(self.d_theta, self.X).T)
 
 
     def generate_b(self):
@@ -74,12 +74,11 @@ class StochasticGradientDescent:
         output = self.O.copy()
         output[output == 0] = 1
         output = np.sign(output)
+        target = self.T.copy().T
 
-        tmp = 0
-        for i in range(0, 16):
-            if output[i] == self.T[i]:
-                tmp = tmp + 1
-        if tmp == 16:
+        output = np.round(output.transpose()).astype(int)   
+
+        if (output == target).all():
             return True
         else:
             return False
@@ -93,8 +92,6 @@ def generate_weights():
 
 def generate_threshold():
     return np.random.uniform(-1, 1)
-
-
 
 
 def main():
