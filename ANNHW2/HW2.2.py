@@ -14,7 +14,7 @@ x_3 = x_temp[:, 3]
 
 x_4 = x_temp[:, 4]
 
-x_data_temp = [x_1, x_2, x_3, x_4]
+x_data_temp = [x_1, x_2, x_3, x_4]  # We store the columns of 'input_data_numeric.csv' without including the 0:th column u = 1,..,16
 
 X_data = np.asmatrix(x_data_temp).transpose()
 
@@ -34,22 +34,29 @@ class StochasticGradientDescent:
     def __init__(self):
 
         self.n = 0.02   # Learning rate
-        self.W = generate_weights()
+        self.W = initialise_weights()
         self.theta = generate_threshold()
         self.X = np.zeros((4,1))
         self.O = np.zeros((16, 1))
         self.T = np.zeros((16, 1))
-        self.d_theta = 0
+        self.c_error = 0
         
 
-    def delta_theta(self, u):
-        d_theta_temp = (self.T[u] - 0.5 * np.dot(self.O[u], self.g_prime()))
-        self.d_theta = d_theta_temp.item()
+    def classification_error(self, u):
+        error_temp = (self.T[u] - 0.5 * np.dot(self.O[u], self.g_prime()))
+        self.c_error = error_temp.item()
 
 
     def train(self):
-        self.theta = self.theta - self.n * self.d_theta
-        self.W = self.W + (self.n * np.dot(self.d_theta, self.X).T)
+        self.update_threshold()
+        self.update_weights()
+
+
+    def update_threshold(self):
+        self.theta = self.theta - self.n * self.c_error
+    
+    def update_weights(self):
+        self.W = self.W + (self.n * np.dot(self.c_error, self.X).T)
 
 
     def generate_b(self):
@@ -82,10 +89,19 @@ class StochasticGradientDescent:
             return True
         else:
             return False
+        
+    
+    def energy_function(self):
+
+        for u in range(0, 16):
+
+            self.X = np.asarray(X_data[u, :])
+            self.output(u)
+            self.classification_error(u)
+            self.train()
 
 
-
-def generate_weights():
+def initialise_weights():
     weights = np.random.uniform(-0.2, 0.2, (4, 1))
     return np.asmatrix(weights)
 
@@ -94,7 +110,7 @@ def generate_threshold():
     return np.random.uniform(-1, 1)
 
 
-def main():
+if __name__ == "__main__":
 
     structure = StochasticGradientDescent()
     maximum_iterations = 10**3
@@ -115,11 +131,7 @@ def main():
         for i in range(0, 10):   # number of retries
             for j in range(0, maximum_iterations):
 
-                for u in range(0, u_range):
-                    structure.X = np.asarray(X_data[u, :])
-                    structure.output(u)
-                    structure.delta_theta(u)
-                    structure.train()
+                structure.energy_function()
  
 
                 if structure.linearly_separable():
@@ -146,7 +158,6 @@ def main():
 
     print("\n" + "The following functions are linearly separable: " + str(linearly_separable_list))
 
-main()
 
 
 
