@@ -39,33 +39,35 @@ class StochasticGradientDescent:
         self.X = np.zeros((4,1))
         self.O = np.zeros((16, 1))
         self.T = np.zeros((16, 1))
-        self.c_error = 0
+        self.delta = 0
         
 
-    def classification_error(self, u):
-        error_temp = (self.T[u] - 0.5 * np.dot(self.O[u], self.g_prime()))
-        self.c_error = error_temp.item()
+    def update_error(self, u):
+        error_temp = (self.T[u] - 0.5 * self.O[u] * self.g_prime())
+        self.delta = error_temp.item()
 
 
     def train(self):
         self.update_threshold()
         self.update_weights()
 
-
     def update_threshold(self):
-        self.theta = self.theta - self.n * self.c_error
+        self.theta = self.theta - self.n * self.delta
     
     def update_weights(self):
-        self.W = self.W + (self.n * np.dot(self.c_error, self.X).T)
+        self.W = self.W + (self.n * np.dot(self.delta, self.X).T)
 
 
     def generate_b(self):
         x_u = np.array(self.X)
         return -self.theta + np.dot(self.W.T, x_u.T)
 
-    def generate_g(self):
+    def generate_output(self):
         b_u = self.generate_b()
         return np.tanh(0.5 * b_u)
+
+    def update_output(self, u):
+        self.O[u] = self.generate_output()
 
 
     def g_prime(self):
@@ -73,34 +75,21 @@ class StochasticGradientDescent:
         return (1 - np.tanh(0.5 * b_u) ** 2)
 
 
-    def output(self, u):
-        self.O[u] = self.generate_g()
-
-
     def linearly_separable(self):
+
         output = self.O.copy()
+        target = self.T.copy().T
+    
         output[output == 0] = 1
         output = np.sign(output)
-        target = self.T.copy().T
-
         output = np.round(output.transpose()).astype(int)   
 
         if (output == target).all():
             return True
         else:
             return False
+
         
-    
-    def energy_function(self):
-
-        for u in range(0, 16):
-
-            self.X = np.asarray(X_data[u, :])
-            self.output(u)
-            self.classification_error(u)
-            self.train()
-
-
 def initialise_weights():
     weights = np.random.uniform(-0.2, 0.2, (4, 1))
     return np.asmatrix(weights)
@@ -123,15 +112,23 @@ if __name__ == "__main__":
     name_index = 0
 
     for t in T_data:  # We go through each input-pattern
+
         structure.T = np.asmatrix(t).copy()
         current_boolean_function = function_names[name_index]
         structure.T = t.copy()
 
-
         for i in range(0, 10):   # number of retries
-            for j in range(0, maximum_iterations):
 
-                structure.energy_function()
+            for j in range(0, maximum_iterations):
+                
+                for u in range(0, 16):
+
+                    structure.X = np.asarray(X_data[u, :])
+
+                    structure.update_output(u)
+                    structure.update_error(u)
+                    
+                    structure.train()
  
 
                 if structure.linearly_separable():
@@ -149,12 +146,13 @@ if __name__ == "__main__":
             
 
             print("\n" + "Retry " + str(i + 1) + ":")
+
             structure.__init__()
             structure.T = t.copy()
 
-        name_index = name_index + 1
-
         structure.__init__()
+
+        name_index = name_index + 1
 
     print("\n" + "The following functions are linearly separable: " + str(linearly_separable_list))
 
