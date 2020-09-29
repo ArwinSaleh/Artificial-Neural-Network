@@ -129,7 +129,6 @@ if __name__ == "__main__":
                     structure.update_error(u)
                     
                     structure.train()
- 
 
                 if structure.linearly_separable():
                     
