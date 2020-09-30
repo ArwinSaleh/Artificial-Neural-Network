@@ -102,8 +102,7 @@ def generate_threshold():
 if __name__ == "__main__":
 
     structure = StochasticGradientDescent()
-    maximum_iterations = 10**3
-    u_range = 16
+    maximum_iterations = 10**5
 
     function_names = ['A', 'B', 'C', 'D', 'E', 'F']
     linearly_separable_list = []
@@ -121,21 +120,21 @@ if __name__ == "__main__":
 
             for j in range(0, maximum_iterations):
                 
-                for u in range(0, 16):
+                u = np.random.randint(0,16)
 
-                    structure.X = np.asarray(X_data[u, :])
+                structure.X = np.asarray(X_data[u, :])
 
-                    structure.update_output(u)
-                    structure.update_error(u)
+                structure.update_output(u)
+                structure.update_error(u)
                     
-                    structure.train()
+                structure.train()
 
                 if structure.linearly_separable():
                     
                     print("\n" + "The following boolean function is linearly separable: " + current_boolean_function)
                     linearly_separable_list.append(current_boolean_function)
                     break
-                
+                structure
             
             if structure.linearly_separable():
                 break
