@@ -1,6 +1,5 @@
 import numpy as np
 from numpy import genfromtxt
-import math as mth
 
 x_temp = genfromtxt('input_data_numeric.csv', delimiter=',')
 
@@ -42,8 +41,8 @@ class StochasticGradientDescent:
         self.T = np.zeros((16, 1))
         self.delta = 0
 
-    def update_error(self, u):
-        error_temp = (self.T[u] - 0.5 * self.O[u] * self.g_prime())
+    def update_error(self, u_index):
+        error_temp = (self.T[u_index] - 0.5 * self.O[u_index] * self.g_prime())
         self.delta = error_temp.item()
 
     def train(self):
@@ -64,12 +63,12 @@ class StochasticGradientDescent:
         b_u = self.generate_b()
         return np.tanh(0.5 * b_u)
 
-    def update_output(self, u):
-        self.O[u] = self.generate_output()
+    def update_output(self, u_index):
+        self.O[u_index] = self.generate_output()
 
     def g_prime(self):
         b_u = self.generate_b()
-        return (1 - np.tanh(0.5 * b_u) ** 2)
+        return 1 - np.tanh(0.5 * b_u) ** 2
 
     def linearly_separable(self):
 
@@ -128,7 +127,6 @@ if __name__ == "__main__":
                     print("\n" + "The following boolean function is linearly separable: " + current_boolean_function)
                     linearly_separable_list.append(current_boolean_function)
                     break
-                structure
 
             if structure.linearly_separable():
                 break
