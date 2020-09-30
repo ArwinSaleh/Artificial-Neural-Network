@@ -112,16 +112,16 @@ if __name__ == "__main__":
 
         for i in range(0, 10):  # number of retries
 
-            for j in range(0, maximum_iterations):
+            for j in range(0, maximum_iterations):  # A maximum if 10000 iterations will be made.
 
-                u = np.random.randint(0, 16)
+                u = np.random.randint(0, 16)    # We chose the element on a random index u to update.
 
                 structure.X = np.asarray(X_data[u, :])
 
                 structure.update_output(u)
                 structure.update_error(u)
 
-                structure.train()
+                structure.train()   # We train the network, I.E, we update the weights and the threshold.
 
                 if structure.linearly_separable():
                     print("\n" + "The following boolean function is linearly separable: " + current_boolean_function)
