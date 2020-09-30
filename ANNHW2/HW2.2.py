@@ -3,7 +3,7 @@ from numpy import genfromtxt
 
 x_temp = genfromtxt('input_data_numeric.csv', delimiter=',')
 
-index_u = x_temp[:, 0]
+index_u = x_temp[:, 0]  # Unused, these are the elements we DON'T use.
 
 x_1 = x_temp[:, 1]
 
