@@ -43,7 +43,7 @@ class StochasticGradientDescent:
 
     def update_error(self, u_index):
         error_temp = (self.T[u_index] - 0.5 * self.O[u_index] * self.g_prime())
-        self.delta = error_temp.item()
+        self.delta = error_temp
 
     def train(self):
         self.update_threshold()
@@ -97,7 +97,7 @@ def generate_threshold():
 if __name__ == "__main__":
 
     structure = StochasticGradientDescent()
-    maximum_iterations = 10 ** 4
+    maximum_iterations = 10 ** 5
 
     function_names = ['A', 'B', 'C', 'D', 'E', 'F']
     linearly_separable_list = []
