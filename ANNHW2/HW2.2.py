@@ -14,8 +14,8 @@ x_3 = x_temp[:, 3]
 
 x_4 = x_temp[:, 4]
 
-x_data_temp = [x_1, x_2, x_3,
-               x_4]  # We store the columns of 'input_data_numeric.csv' without including the 0:th column u = 1,..,16
+# We store the columns of 'input_data_numeric.csv' without including the 0:th column u = 1,..,16
+x_data_temp = [x_1, x_2, x_3, x_4]
 
 X_data = np.asmatrix(x_data_temp).transpose()
 
@@ -98,7 +98,7 @@ def generate_threshold():
 if __name__ == "__main__":
 
     structure = StochasticGradientDescent()
-    maximum_iterations = 10 ** 5
+    maximum_iterations = 10 ** 4
 
     function_names = ['A', 'B', 'C', 'D', 'E', 'F']
     linearly_separable_list = []
