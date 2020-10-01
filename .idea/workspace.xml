@@ -28,7 +28,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db2f6e91-86b9-44f3-ab7e-6bc7ffa9c80c" name="Default Changelist" comment="commit">
-      <change beforePath="$PROJECT_DIR$/ANNHW2/HW2.2.py" beforeDir="false" afterPath="$PROJECT_DIR$/ANNHW2/HW2.2.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/Artificial-Neural-Network.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Artificial-Neural-Network.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ANNHW2/HW2.4.py" beforeDir="false" afterPath="$PROJECT_DIR$/ANNHW2/HW2.4.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,7 +68,7 @@
       <recent name="$PROJECT_DIR$/ANNHW2" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python.HW2.4">
     <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
@@ -92,8 +95,30 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="HW2.4" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Artificial-Neural-Network" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ANNHW2" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ANNHW2/HW2.4.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python.HW2.4" />
         <item itemvalue="Python.HW2.2" />
         <item itemvalue="Python.HW2.2" />
         <item itemvalue="Python.HW2.2" />
@@ -164,26 +189,26 @@
     <option name="LAST_COMMIT_MESSAGE" value="commit" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1899" height="170" key="GridCell.Tab.0.bottom" timestamp="1601493054030">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1897" height="228" key="GridCell.Tab.0.bottom" timestamp="1601556301371">
+      <screen x="0" y="44" width="1920" height="967" />
     </state>
     <state width="1899" height="170" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601493054030" />
-    <state width="1897" height="177" key="GridCell.Tab.0.bottom/0.44.1920.967@0.44.1920.967" timestamp="1601462938018" />
-    <state width="1899" height="170" key="GridCell.Tab.0.center" timestamp="1601493054030">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1897" height="228" key="GridCell.Tab.0.bottom/0.44.1920.967@0.44.1920.967" timestamp="1601556301371" />
+    <state width="1897" height="228" key="GridCell.Tab.0.center" timestamp="1601556301370">
+      <screen x="0" y="44" width="1920" height="967" />
     </state>
     <state width="1899" height="170" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601493054030" />
-    <state width="1897" height="177" key="GridCell.Tab.0.center/0.44.1920.967@0.44.1920.967" timestamp="1601462938017" />
-    <state width="1899" height="170" key="GridCell.Tab.0.left" timestamp="1601493054030">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1897" height="228" key="GridCell.Tab.0.center/0.44.1920.967@0.44.1920.967" timestamp="1601556301370" />
+    <state width="1897" height="228" key="GridCell.Tab.0.left" timestamp="1601556301370">
+      <screen x="0" y="44" width="1920" height="967" />
     </state>
     <state width="1899" height="170" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601493054030" />
-    <state width="1897" height="177" key="GridCell.Tab.0.left/0.44.1920.967@0.44.1920.967" timestamp="1601462938017" />
-    <state width="1899" height="170" key="GridCell.Tab.0.right" timestamp="1601493054030">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1897" height="228" key="GridCell.Tab.0.left/0.44.1920.967@0.44.1920.967" timestamp="1601556301370" />
+    <state width="1897" height="228" key="GridCell.Tab.0.right" timestamp="1601556301370">
+      <screen x="0" y="44" width="1920" height="967" />
     </state>
     <state width="1899" height="170" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601493054030" />
-    <state width="1897" height="177" key="GridCell.Tab.0.right/0.44.1920.967@0.44.1920.967" timestamp="1601462938017" />
+    <state width="1897" height="228" key="GridCell.Tab.0.right/0.44.1920.967@0.44.1920.967" timestamp="1601556301370" />
     <state width="1899" height="340" key="GridCell.Tab.1.bottom" timestamp="1601492531834">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -200,15 +225,15 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="340" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601492531834" />
-    <state x="688" y="63" width="1022" height="736" key="SettingsEditor" timestamp="1601492549644">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="688" y="103" width="1022" height="736" key="SettingsEditor" timestamp="1601553146255">
+      <screen x="0" y="44" width="1920" height="967" />
     </state>
     <state x="688" y="63" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1601492549644" />
-    <state x="688" y="103" width="1022" height="736" key="SettingsEditor/0.44.1920.967@0.44.1920.967" timestamp="1601463058609" />
-    <state x="555" y="231" width="800" height="542" key="Vcs.Push.Dialog.v2" timestamp="1601492728251">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state x="688" y="103" width="1022" height="736" key="SettingsEditor/0.44.1920.967@0.44.1920.967" timestamp="1601553146255" />
+    <state x="555" y="259" width="800" height="542" key="Vcs.Push.Dialog.v2" timestamp="1601556294341">
+      <screen x="0" y="44" width="1920" height="967" />
     </state>
     <state x="555" y="231" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601492728251" />
-    <state x="555" y="259" width="800" height="542" key="Vcs.Push.Dialog.v2/0.44.1920.967@0.44.1920.967" timestamp="1601462878568" />
+    <state x="555" y="259" width="800" height="542" key="Vcs.Push.Dialog.v2/0.44.1920.967@0.44.1920.967" timestamp="1601556294341" />
   </component>
 </project>
