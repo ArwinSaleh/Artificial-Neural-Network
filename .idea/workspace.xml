@@ -28,6 +28,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db2f6e91-86b9-44f3-ab7e-6bc7ffa9c80c" name="Default Changelist" comment="commit">
+      <change afterPath="$PROJECT_DIR$/ANNHW2/test.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ANNHW2/HW2.4.py" beforeDir="false" afterPath="$PROJECT_DIR$/ANNHW2/HW2.4.py" afterDir="false" />
     </list>
@@ -38,6 +39,13 @@
   </component>
   <component name="ClangdSettings">
     <option name="formatViaClangd" value="false" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -57,22 +65,25 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="cf.first.check.clang-format" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/ANNHW2" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/ANNHW2" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/ANNHW2" />
     </key>
   </component>
-  <component name="RunManager" selected="Python.HW2.4">
+  <component name="RunManager" selected="Python.HomeWork 2 - Problem 4">
     <configuration default="true" type="GradleAppRunConfiguration" factoryName="Application" REDIRECT_INPUT="false" PASS_PARENT_ENVS_2="true">
       <method v="2">
         <option name="com.jetbrains.cidr.cpp.gradle.execution.GradleNativeBuildBeforeRunTaskProvider$BuildBeforeRunTask" enabled="true" />
       </method>
     </configuration>
-    <configuration name="HW2.2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="HomeWork 2 - Problem 2" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Artificial-Neural-Network" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -84,7 +95,7 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ANNHW2/HW2.2.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ANNHW2/HomeWork 2 - Problem 2.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -93,7 +104,7 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="HW2.4" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+    <configuration name="HomeWork 2 - Problem 4" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Artificial-Neural-Network" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -105,7 +116,49 @@
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ANNHW2/HW2.4.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ANNHW2/HomeWork 2 - Problem 4.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="SAM" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Artificial-Neural-Network" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ANNHW2" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ANNHW2/SAM.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Artificial-Neural-Network" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ANNHW2" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ANNHW2/test.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -116,11 +169,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Python.HW2.4" />
-        <item itemvalue="Python.HW2.2" />
-        <item itemvalue="Python.HW2.2" />
-        <item itemvalue="Python.HW2.2" />
-        <item itemvalue="Python.HW2.2" />
+        <item itemvalue="Python.HomeWork 2 - Problem 4" />
+        <item itemvalue="Python.test" />
+        <item itemvalue="Python.SAM" />
+        <item itemvalue="Python.HomeWork 2 - Problem 2" />
+        <item itemvalue="Python.HomeWork 2 - Problem 2" />
       </list>
     </recent_temporary>
   </component>
@@ -176,7 +229,14 @@
       <option name="project" value="LOCAL" />
       <updated>1601570697660</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="commit">
+      <created>1601585935836</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1601585935836</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -201,30 +261,34 @@
     <option name="LAST_COMMIT_MESSAGE" value="commit" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1897" height="228" key="GridCell.Tab.0.bottom" timestamp="1601585744530">
+    <state x="651" y="313" width="607" height="423" key="#com.intellij.fileTypes.FileTypeChooser" timestamp="1601647142084">
+      <screen x="0" y="44" width="1920" height="967" />
+    </state>
+    <state x="651" y="313" width="607" height="423" key="#com.intellij.fileTypes.FileTypeChooser/0.44.1920.967@0.44.1920.967" timestamp="1601647142084" />
+    <state width="1897" height="228" key="GridCell.Tab.0.bottom" timestamp="1601650705929">
       <screen x="0" y="44" width="1920" height="967" />
     </state>
     <state width="1899" height="170" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601493054030" />
-    <state width="1897" height="228" key="GridCell.Tab.0.bottom/0.38.1920.973@0.38.1920.973" timestamp="1601574324228" />
-    <state width="1897" height="228" key="GridCell.Tab.0.bottom/0.44.1920.967@0.44.1920.967" timestamp="1601585744530" />
-    <state width="1897" height="228" key="GridCell.Tab.0.center" timestamp="1601585744529">
+    <state width="1897" height="228" key="GridCell.Tab.0.bottom/0.38.1920.973@0.38.1920.973" timestamp="1601646709895" />
+    <state width="1897" height="228" key="GridCell.Tab.0.bottom/0.44.1920.967@0.44.1920.967" timestamp="1601650705929" />
+    <state width="1897" height="228" key="GridCell.Tab.0.center" timestamp="1601650705928">
       <screen x="0" y="44" width="1920" height="967" />
     </state>
     <state width="1899" height="170" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601493054030" />
-    <state width="1897" height="228" key="GridCell.Tab.0.center/0.38.1920.973@0.38.1920.973" timestamp="1601574324227" />
-    <state width="1897" height="228" key="GridCell.Tab.0.center/0.44.1920.967@0.44.1920.967" timestamp="1601585744529" />
-    <state width="1897" height="228" key="GridCell.Tab.0.left" timestamp="1601585744529">
+    <state width="1897" height="228" key="GridCell.Tab.0.center/0.38.1920.973@0.38.1920.973" timestamp="1601646709894" />
+    <state width="1897" height="228" key="GridCell.Tab.0.center/0.44.1920.967@0.44.1920.967" timestamp="1601650705928" />
+    <state width="1897" height="228" key="GridCell.Tab.0.left" timestamp="1601650705927">
       <screen x="0" y="44" width="1920" height="967" />
     </state>
     <state width="1899" height="170" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601493054030" />
-    <state width="1897" height="228" key="GridCell.Tab.0.left/0.38.1920.973@0.38.1920.973" timestamp="1601574324227" />
-    <state width="1897" height="228" key="GridCell.Tab.0.left/0.44.1920.967@0.44.1920.967" timestamp="1601585744529" />
-    <state width="1897" height="228" key="GridCell.Tab.0.right" timestamp="1601585744529">
+    <state width="1897" height="228" key="GridCell.Tab.0.left/0.38.1920.973@0.38.1920.973" timestamp="1601646709893" />
+    <state width="1897" height="228" key="GridCell.Tab.0.left/0.44.1920.967@0.44.1920.967" timestamp="1601650705927" />
+    <state width="1897" height="228" key="GridCell.Tab.0.right" timestamp="1601650705928">
       <screen x="0" y="44" width="1920" height="967" />
     </state>
     <state width="1899" height="170" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601493054030" />
-    <state width="1897" height="228" key="GridCell.Tab.0.right/0.38.1920.973@0.38.1920.973" timestamp="1601574324228" />
-    <state width="1897" height="228" key="GridCell.Tab.0.right/0.44.1920.967@0.44.1920.967" timestamp="1601585744529" />
+    <state width="1897" height="228" key="GridCell.Tab.0.right/0.38.1920.973@0.38.1920.973" timestamp="1601646709895" />
+    <state width="1897" height="228" key="GridCell.Tab.0.right/0.44.1920.967@0.44.1920.967" timestamp="1601650705928" />
     <state width="1899" height="340" key="GridCell.Tab.1.bottom" timestamp="1601492531834">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
@@ -241,16 +305,16 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state width="1899" height="340" key="GridCell.Tab.1.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601492531834" />
-    <state x="688" y="103" width="1022" height="736" key="SettingsEditor" timestamp="1601565226045">
+    <state x="688" y="103" width="1022" height="736" key="SettingsEditor" timestamp="1601615990122">
       <screen x="0" y="44" width="1920" height="967" />
     </state>
     <state x="688" y="63" key="SettingsEditor/0.0.1920.1040@0.0.1920.1040" timestamp="1601492549644" />
-    <state x="688" y="103" width="1022" height="736" key="SettingsEditor/0.44.1920.967@0.44.1920.967" timestamp="1601565226045" />
-    <state x="555" y="259" width="800" height="542" key="Vcs.Push.Dialog.v2" timestamp="1601570703437">
+    <state x="688" y="103" width="1022" height="736" key="SettingsEditor/0.44.1920.967@0.44.1920.967" timestamp="1601615990122" />
+    <state x="555" y="259" width="800" height="542" key="Vcs.Push.Dialog.v2" timestamp="1601585950091">
       <screen x="0" y="44" width="1920" height="967" />
     </state>
     <state x="555" y="231" key="Vcs.Push.Dialog.v2/0.0.1920.1040@0.0.1920.1040" timestamp="1601492728251" />
-    <state x="555" y="259" width="800" height="542" key="Vcs.Push.Dialog.v2/0.44.1920.967@0.44.1920.967" timestamp="1601570703437" />
+    <state x="555" y="259" width="800" height="542" key="Vcs.Push.Dialog.v2/0.44.1920.967@0.44.1920.967" timestamp="1601585950091" />
     <state x="623" y="212" width="672" height="678" key="search.everywhere.popup" timestamp="1601569797061">
       <screen x="0" y="44" width="1920" height="967" />
     </state>
