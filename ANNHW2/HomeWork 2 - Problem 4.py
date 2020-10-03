@@ -19,6 +19,7 @@ p_val = len(t_u_val)
 class TwoLayerPerceptron:
 
     def __init__(self):
+        self.n = 0.02   # Learning rate
         self.X = np.array([x1_u, x2_u]).T
         self.T = np.array([t_u]).T
         self.w1 = []
@@ -47,12 +48,12 @@ class TwoLayerPerceptron:
 
     def initialize_thresholds(self):
         size1 = (self.M1, 1)
-        self.t1 = np.zeros(size1)
+        self.t1 = np.random.uniform(-1, 1, size1)
 
         size2 = (self.M2, 1)
-        self.t2 = np.zeros(size2)
+        self.t2 = np.random.uniform(-1, 1, size2)
 
-        self.t3 = 0
+        self.t3 = np.random.uniform(-1, 1)
 
     def compute_V_j(self):
         self.V_j = np.zeros((self.M1, u_index))
@@ -68,7 +69,7 @@ class TwoLayerPerceptron:
     def compute_V_i(self):
         self.V_i = np.zeros((self.M2, u_index))
 
-        V_j_tmp = self.compute_V_j().copy()  # Index error
+        V_j_tmp = self.V_j.copy()  # Index error
 
         sum1 = 0
 
@@ -80,7 +81,7 @@ class TwoLayerPerceptron:
         return self.V_i
 
     def compute_output(self):
-        V_i_tmp = self.compute_V_i().copy()
+        V_i_tmp = self.V_i.copy()
 
         sum2 = 0
         for i in range(0, self.M2):
@@ -116,4 +117,7 @@ if __name__ == '__main__':
     perceptron.initialize_weights()
     perceptron.initialize_thresholds()
 
-    print(perceptron.compute_output())
+    perceptron.compute_V_j()
+    perceptron.compute_V_i()
+
+    print(perceptron.compute_V_i())
