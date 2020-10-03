@@ -32,8 +32,8 @@ class TwoLayerPerceptron:
         self.t1 = []
         self.t2 = []
         self.t3 = 0
-        self.b1 = []
-        self.b2 = []
+        self.b1 = 0
+        self.b2 = 0
         self.b3 = 0
         self.M1 = 10
         self.M2 = 10
@@ -42,6 +42,12 @@ class TwoLayerPerceptron:
         self.e = 0  # Current epoch
         self.V_j = []
         self.V_i = []
+        self.delta_t1 = []
+        self.delta_t2 = []
+        self.delta_t3 = 0
+        self.delta_w1 = []
+        self.delta_w2 = []
+        self.delta_w3 = 0
 
     def initialize_weights(self):
         size1 = (self.M1, 2)
@@ -91,11 +97,6 @@ class TwoLayerPerceptron:
             sum2 = sum2 + self.w3[i].T * V_i_tmp[i][:] - self.t3
         self.O = np.tanh(sum2)
 
-    def compute_b(self):
-        self.b1 = self.w1 * self.V_j - self.t1
-        self.b2 = np.dot(self.w2, self.V_i) - self.t2
-        self.b3 = self.w3 * self.O - self.t3
-
     def classification_error(self):
         target = self.T.copy()
 
@@ -109,25 +110,42 @@ class TwoLayerPerceptron:
 
     def train_network(self):
 
-        self.t1 = self.t1 - self.C * self.t1
-        self.t2 = self.t2 - self.C * self.t2
-        self.t3 = self.t3 - self.C * self.t3
+        self.w1 = self.w1 + self.n * self.delta_w1
+        self.w2 = self.w2 + self.n * self.delta_w2
+        self.w3 = self.w3 + self.n * self.delta_w3
+
+        self.t1 = self.t1 - self.n * self.delta_t1
+        self.t2 = self.t2 - self.n * self.delta_t2
+        self.t3 = self.t3 - self.n * self.delta_t3
 
     def propagate_forward(self):
         self.compute_V_j()
         self.compute_V_i()
         self.compute_output()
-        self.compute_b()
+
+    def propagate_backward(self, u0):
+
+        input_temp = self.X.copy()
+
+        delta = (self.T[u0] - self.O[u0]) * g_prime(self.b3)
+        self.delta_t3 = delta
+        self.delta_w3 = delta * self.V_i[:, u0]
+
+        delta = delta * self.w3 * g_prime(self.b2)
+        self.delta_t2 = delta
+        self.delta_w2 = delta * self.V_j[:, u0]
+
+        delta = delta * self.w2 * g_prime(self.b1)
+        self.delta_t1 = delta
+        self.delta_w1 = delta * input_temp[u0, :]
 
 
 def g_prime(b):
     return 1 - np.tanh(b) ** 2
 
 
-if __name__ == '__main__':
     perceptron = TwoLayerPerceptron()
     length_training = len(training_set)
-
     run = 1
     perceptron.initialize_weights()
     perceptron.initialize_thresholds()
@@ -135,4 +153,10 @@ if __name__ == '__main__':
 
         for i in range(0, length_training):
             u = np.random.randint(0, length_training)
+
             perceptron.propagate_forward()
+            perceptron.propagate_backward(u)
+
+            perceptron.train_network()
+
+        run = 0
