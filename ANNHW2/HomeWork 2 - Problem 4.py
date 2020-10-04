@@ -1,8 +1,9 @@
 import numpy as np
 from numpy import genfromtxt
+import os
 
 training_set = genfromtxt('training_set.csv', delimiter=',')
-validation_set = genfromtxt('validation_set.csv', delimiter=",")
+validation_set = genfromtxt('validation_set.csv', delimiter=',')
 
 x1_u = training_set[:, 0]
 x2_u = training_set[:, 1]
@@ -40,8 +41,8 @@ class TwoLayerPerceptron:
         self.b1 = 0
         self.b2 = 0
         self.b3 = 0
-        self.M1 = 10
-        self.M2 = 10
+        self.M1 = 5
+        self.M2 = 5
         self.C = 1.00  # Classification error
         self.O = []
         self.O_val = []
@@ -135,15 +136,17 @@ class TwoLayerPerceptron:
         self.O_val = np.tanh(sum2).T
 
     def compute_classification_error(self):
-        target = self.T_val
+        target = self.T_val.copy()
 
-        output = self.O_val
+        output = self.O_val.copy()
         output[output == 0] = 1
         output = np.sign(output)
 
-        error = np.abs(output - target)
+        error = (np.subtract(output, target))
+        error = np.abs(error)
+        error_sum = np.sum(error)
 
-        self.C = np.sum(error) / (2 * p_val)
+        self.C = error_sum / (2 * p_val)
 
     def train_network(self):
 
@@ -169,7 +172,7 @@ class TwoLayerPerceptron:
         delta = (self.T[u0] - self.O[u0]) * g_prime(self.b3)
         delta = delta.reshape((1, 1))
         V_i_tmp = self.V_i[:, u0]
-        V_i_tmp = V_i_tmp.reshape((10, 1))
+        V_i_tmp = V_i_tmp.reshape((self.M2, 1))
         self.delta_t3 = delta
         self.delta_w3 = np.dot(delta, V_i_tmp.T)
 
@@ -192,12 +195,12 @@ def main():
     perceptron.initialize_weights()
     perceptron.initialize_thresholds()
 
-    maximum_epochs = 1000
+    maximum_epochs = 100
     current_epoch = 0
 
     while perceptron.C >= 0.12 and current_epoch < maximum_epochs:
 
-        for i in range(0, 10):
+        for i in range(0, 100):
             u = np.random.randint(0, length_training)
 
             perceptron.propagate_forward()
@@ -213,9 +216,16 @@ def main():
         perceptron.compute_classification_error()
         errors[current_epoch] = perceptron.C
 
-        print("Currently on epoch number " + str(current_epoch) + "\nValidation error = " + str(perceptron.C))
+        print("Currently on epoch number " + str(current_epoch) + "\nValidation error = " + str(errors[current_epoch]))
 
         current_epoch += 1
+
+    np.savetxt(os.path.join('.', 'w1.csv'), perceptron.w1, delimiter=',')
+    np.savetxt(os.path.join('.', 'w2.csv'), perceptron.w2, delimiter=',')
+    np.savetxt(os.path.join('.', 'w3.csv'), perceptron.w3, delimiter=',')
+    np.savetxt(os.path.join('.', 't1.csv'), perceptron.t1, delimiter=',')
+    np.savetxt(os.path.join('.', 't2.csv'), perceptron.t2, delimiter=',')
+    np.savetxt(os.path.join('.', 't3.csv'), perceptron.t3, delimiter=',')
 
 
 main()
