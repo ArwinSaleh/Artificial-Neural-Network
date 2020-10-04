@@ -25,6 +25,7 @@ class TwoLayerPerceptron:
     def __init__(self):
         self.n = 0.02  # Learning rate
         self.X = np.array([x1_u, x2_u]).T  # Inputs
+        self.X_validation = np.array([x1_u_val, x2_u_val]).T
         self.T = np.array([t_u]).T  # Targets
         self.w1 = []
         self.w2 = []
@@ -38,7 +39,8 @@ class TwoLayerPerceptron:
         self.M1 = 10
         self.M2 = 10
         self.C = 0.00  # Classification error
-        self.O = np.zeros((u_index, 1))  # Output
+        #self.O = np.zeros((u_index, 1))  # Output
+        self.O = []
         self.e = 0  # Current epoch
         self.V_j = []
         self.V_i = []
@@ -95,7 +97,7 @@ class TwoLayerPerceptron:
         sum2 = 0
         for i in range(0, self.M2):
             sum2 = sum2 + np.dot(self.w3[i][0], V_i_tmp[i][:]) - self.t3
-        self.O = np.tanh(sum2)
+        self.O = np.tanh(sum2).T
 
     def classification_error(self):
         target = self.T.copy()
@@ -110,9 +112,9 @@ class TwoLayerPerceptron:
 
     def train_network(self):
 
-        self.w1 = np.add(self.w1, (self.n * self.delta_w1))
-        self.w2 = np.add(self.w2, (self.n * self.delta_w2))
-        self.w3 = np.add(self.w3, (self.n * self.delta_w3))
+        self.w1 = np.add(self.w1, np.transpose(self.n * self.delta_w1))
+        self.w2 = np.add(self.w2, np.transpose(self.n * self.delta_w2))
+        self.w3 = np.add(self.w3, np.transpose(self.n * self.delta_w3))
 
         self.t1 = np.subtract(self.t1, self.n * self.delta_t1)
         self.t2 = np.subtract(self.t2, self.n * self.delta_t2)
@@ -130,8 +132,11 @@ class TwoLayerPerceptron:
         input_tmp = input_tmp.reshape(2, 1)
 
         delta = (self.T[u0] - self.O[u0]) * g_prime(self.b3)
+        delta = delta.reshape((1, 1))
+        V_i_tmp = self.V_i[:, u0]
+        V_i_tmp = V_i_tmp.reshape((10, 1))
         self.delta_t3 = delta
-        self.delta_w3 = np.multiply(delta, self.V_i[:, u0])
+        self.delta_w3 = np.dot(delta, V_i_tmp.T)
 
         delta = delta * self.w3 * g_prime(self.b2)
         self.delta_t2 = delta
@@ -139,7 +144,7 @@ class TwoLayerPerceptron:
 
         delta = np.dot(delta.T, self.w2) * g_prime(self.b1)
         self.delta_t1 = delta
-        self.delta_w1 = np.dot(delta, input_tmp)
+        self.delta_w1 = np.dot(input_tmp, delta)
 
 
 def g_prime(b):
@@ -149,6 +154,7 @@ def g_prime(b):
 def main():
     perceptron = TwoLayerPerceptron()
     length_training = len(training_set)
+    length_validation = len(validation_set)
     run = 1
     perceptron.initialize_weights()
     perceptron.initialize_thresholds()
@@ -162,7 +168,10 @@ def main():
 
             perceptron.train_network()
 
-        run = 0
+        outputs_temp = np.zeros()
+
+        for j in range(0, length_validation):
+
 
 
 main()
