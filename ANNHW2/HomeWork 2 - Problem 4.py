@@ -19,6 +19,9 @@ maximum_iterations = 10 ** 3
 epochs = 10 ** 3
 layers = 3
 
+length_training = len(training_set)
+length_validation = len(validation_set)
+
 
 class TwoLayerPerceptron:
 
@@ -27,6 +30,7 @@ class TwoLayerPerceptron:
         self.X = np.array([x1_u, x2_u]).T  # Inputs
         self.X_validation = np.array([x1_u_val, x2_u_val]).T
         self.T = np.array([t_u]).T  # Targets
+        self.T_val = np.array([t_u_val]).T
         self.w1 = []
         self.w2 = []
         self.w3 = []
@@ -38,12 +42,14 @@ class TwoLayerPerceptron:
         self.b3 = 0
         self.M1 = 10
         self.M2 = 10
-        self.C = 0.00  # Classification error
-        #self.O = np.zeros((u_index, 1))  # Output
+        self.C = 1.00  # Classification error
         self.O = []
+        self.O_val = []
         self.e = 0  # Current epoch
         self.V_j = []
         self.V_i = []
+        self.Vj_val = []
+        self.Vi_val = []
         self.delta_t1 = 0
         self.delta_t2 = 0
         self.delta_t3 = 0
@@ -71,7 +77,7 @@ class TwoLayerPerceptron:
         self.t3 = np.random.uniform(-1, 1)
 
     def compute_V_j(self):
-        self.V_j = np.zeros((self.M1, u_index))
+        self.V_j = np.zeros((self.M1, length_training))
 
         sum0 = 0
         for j in range(0, self.M1):
@@ -80,7 +86,7 @@ class TwoLayerPerceptron:
             self.V_j[j, :] = np.tanh(sum0)
 
     def compute_V_i(self):
-        self.V_i = np.zeros((self.M2, u_index))
+        self.V_i = np.zeros((self.M2, length_training))
 
         V_j_tmp = self.V_j.copy()  # Index error
 
@@ -99,16 +105,45 @@ class TwoLayerPerceptron:
             sum2 = sum2 + np.dot(self.w3[i][0], V_i_tmp[i][:]) - self.t3
         self.O = np.tanh(sum2).T
 
-    def classification_error(self):
-        target = self.T.copy()
+    def compute_Vj_val(self):
+        self.Vj_val = np.zeros((self.M1, length_validation))
 
-        output = self.O
+        sum0 = 0
+        for j in range(0, self.M1):
+            for k in range(0, 2):
+                sum0 = sum0 + np.dot(self.w1[j][k], self.X_validation[:, k]) - self.t1[j][0]
+            self.Vj_val[j, :] = np.tanh(sum0)
+
+    def compute_Vi_val(self):
+        self.Vi_val = np.zeros((self.M2, length_validation))
+
+        V_j_tmp = self.Vj_val.copy()  # Index error
+
+        sum1 = 0
+
+        for i in range(0, self.M2):
+            for j in range(0, self.M1):
+                sum1 = sum1 + self.w2[i][j] * V_j_tmp[j][:] - self.t2[i][0]
+            self.Vi_val[i, :] = np.tanh(sum1)
+
+    def compute_output_val(self):
+        V_i_tmp = self.Vi_val.copy()
+
+        sum2 = 0
+        for i in range(0, self.M2):
+            sum2 = sum2 + np.dot(self.w3[i][0], V_i_tmp[i][:]) - self.t3
+        self.O_val = np.tanh(sum2).T
+
+    def compute_classification_error(self):
+        target = self.T_val
+
+        output = self.O_val
         output[output == 0] = 1
         output = np.sign(output)
 
         error = np.abs(output - target)
 
-        self.C = np.sum(error.T) / (2 * p_val)
+        self.C = np.sum(error) / (2 * p_val)
 
     def train_network(self):
 
@@ -153,14 +188,16 @@ def g_prime(b):
 
 def main():
     perceptron = TwoLayerPerceptron()
-    length_training = len(training_set)
-    length_validation = len(validation_set)
-    run = 1
+
     perceptron.initialize_weights()
     perceptron.initialize_thresholds()
-    while run == 1:
 
-        for i in range(0, length_training):
+    maximum_epochs = 1000
+    current_epoch = 0
+
+    while perceptron.C >= 0.12 and current_epoch < maximum_epochs:
+
+        for i in range(0, 10):
             u = np.random.randint(0, length_training)
 
             perceptron.propagate_forward()
@@ -168,10 +205,17 @@ def main():
 
             perceptron.train_network()
 
-        outputs_temp = np.zeros()
+        perceptron.compute_Vj_val()
+        perceptron.compute_Vi_val()
+        perceptron.compute_output_val()
 
-        for j in range(0, length_validation):
+        errors = np.zeros((length_validation, 1))
+        perceptron.compute_classification_error()
+        errors[current_epoch] = perceptron.C
 
+        print("Currently on epoch number " + str(current_epoch) + "\nValidation error = " + str(perceptron.C))
+
+        current_epoch += 1
 
 
 main()
