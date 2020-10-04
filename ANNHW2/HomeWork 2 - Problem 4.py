@@ -26,9 +26,9 @@ class TwoLayerPerceptron:
         self.n = 0.02  # Learning rate
         self.X = np.array([x1_u, x2_u]).T  # Inputs
         self.T = np.array([t_u]).T  # Targets
-        self.w1 = 0
-        self.w2 = 0
-        self.w3 = 0
+        self.w1 = []
+        self.w2 = []
+        self.w3 = []
         self.t1 = []
         self.t2 = []
         self.t3 = 0
@@ -86,7 +86,7 @@ class TwoLayerPerceptron:
 
         for i in range(0, self.M2):
             for j in range(0, self.M1):
-                sum1 = sum1 + self.w2[i][j] * V_j_tmp[j][:] - self.t2[i]
+                sum1 = sum1 + self.w2[i][j] * V_j_tmp[j][:] - self.t2[i][0]
             self.V_i[i, :] = np.tanh(sum1)
 
     def compute_output(self):
@@ -110,13 +110,13 @@ class TwoLayerPerceptron:
 
     def train_network(self):
 
-        self.w1 = self.w1 + self.n * self.delta_w1
-        self.w2 = self.w2 + self.n * self.delta_w2
-        self.w3 = self.w3 + self.n * self.delta_w3
+        self.w1 = np.add(self.w1, (self.n * self.delta_w1))
+        self.w2 = np.add(self.w2, (self.n * self.delta_w2))
+        self.w3 = np.add(self.w3, (self.n * self.delta_w3))
 
-        self.t1 = self.t1 - self.n * self.delta_t1
-        self.t2 = self.t2 - self.n * self.delta_t2
-        self.t3 = self.t3 - self.n * self.delta_t3
+        self.t1 = np.subtract(self.t1, self.n * self.delta_t1)
+        self.t2 = np.subtract(self.t2, self.n * self.delta_t2)
+        self.t3 = np.subtract(self.t3, self.n * self.delta_t3)
 
     def propagate_forward(self):
         self.compute_V_j()
@@ -125,24 +125,21 @@ class TwoLayerPerceptron:
 
     def propagate_backward(self, u0):
 
-        input_temp = self.X.copy()
-        input_temp = np.expand_dims(input_temp[u0, :], axis=1)
-        V_j_tmp = self.V_j.copy()
-        V_j_tmp = np.expand_dims(V_j_tmp[:, u0], axis=1)
-        V_i_tmp = self.V_i.copy()
-        V_i_tmp = np.expand_dims(V_i_tmp[:, u0], axis=1)
+        tmp = self.X.copy()
+        input_tmp = tmp[u0, :]
+        input_tmp = input_tmp.reshape(2, 1)
 
         delta = (self.T[u0] - self.O[u0]) * g_prime(self.b3)
         self.delta_t3 = delta
-        self.delta_w3 = np.dot(delta, V_i_tmp.T)
+        self.delta_w3 = np.multiply(delta, self.V_i[:, u0])
 
         delta = delta * self.w3 * g_prime(self.b2)
         self.delta_t2 = delta
-        self.delta_w2 = np.dot(delta.T, V_j_tmp)
+        self.delta_w2 = np.dot(delta.T, self.V_j[:, u0])
 
         delta = np.dot(delta.T, self.w2) * g_prime(self.b1)
         self.delta_t1 = delta
-        self.delta_w1 = np.multiply(delta.T, input_temp.T)
+        self.delta_w1 = np.dot(delta, input_tmp)
 
 
 def g_prime(b):
