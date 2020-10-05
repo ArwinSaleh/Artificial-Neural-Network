@@ -28,16 +28,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="db2f6e91-86b9-44f3-ab7e-6bc7ffa9c80c" name="Default Changelist" comment="commit">
-      <change afterPath="$PROJECT_DIR$/ANNHW2/t1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ANNHW2/t2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ANNHW2/t3.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ANNHW2/w1.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ANNHW2/w2.csv" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/ANNHW2/w3.csv" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/ANNHW2/TEST.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/Artificial-Neural-Network.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/Artificial-Neural-Network.iml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/ANNHW2/HomeWork 2 - Problem 4.py" beforeDir="false" afterPath="$PROJECT_DIR$/ANNHW2/HomeWork 2 - Problem 4.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ANNHW2/t1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/ANNHW2/t1.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ANNHW2/t2.csv" beforeDir="false" afterPath="$PROJECT_DIR$/ANNHW2/t2.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ANNHW2/t3.csv" beforeDir="false" afterPath="$PROJECT_DIR$/ANNHW2/t3.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ANNHW2/w1.csv" beforeDir="false" afterPath="$PROJECT_DIR$/ANNHW2/w1.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ANNHW2/w2.csv" beforeDir="false" afterPath="$PROJECT_DIR$/ANNHW2/w2.csv" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/ANNHW2/w3.csv" beforeDir="false" afterPath="$PROJECT_DIR$/ANNHW2/w3.csv" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -153,6 +154,27 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="TEST" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="Artificial-Neural-Network" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/ANNHW2" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/ANNHW2/TEST.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="test" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="Artificial-Neural-Network" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -177,10 +199,10 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.HomeWork 2 - Problem 4" />
+        <item itemvalue="Python.TEST" />
         <item itemvalue="Python.test" />
         <item itemvalue="Python.HomeWork 2 - Problem 2" />
         <item itemvalue="Python.SAM" />
-        <item itemvalue="Python.HomeWork 2 - Problem 2" />
       </list>
     </recent_temporary>
   </component>
@@ -283,30 +305,30 @@
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
     <state x="210" y="270" key="#com.intellij.refactoring.safeDelete.UnsafeUsagesDialog/0.0.1920.1040@0.0.1920.1040" timestamp="1601832143196" />
-    <state width="936" height="245" key="GridCell.Tab.0.bottom" timestamp="1601832361515">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1897" height="332" key="GridCell.Tab.0.bottom" timestamp="1601901117900">
+      <screen x="0" y="44" width="1920" height="967" />
     </state>
     <state width="936" height="245" key="GridCell.Tab.0.bottom/0.0.1920.1040@0.0.1920.1040" timestamp="1601832361515" />
     <state width="1897" height="268" key="GridCell.Tab.0.bottom/0.38.1920.973@0.38.1920.973" timestamp="1601824144245" />
-    <state width="1897" height="268" key="GridCell.Tab.0.bottom/0.44.1920.967@0.44.1920.967" timestamp="1601829251392" />
-    <state width="936" height="245" key="GridCell.Tab.0.center" timestamp="1601832361515">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1897" height="332" key="GridCell.Tab.0.bottom/0.44.1920.967@0.44.1920.967" timestamp="1601901117900" />
+    <state width="1897" height="332" key="GridCell.Tab.0.center" timestamp="1601901117900">
+      <screen x="0" y="44" width="1920" height="967" />
     </state>
     <state width="936" height="245" key="GridCell.Tab.0.center/0.0.1920.1040@0.0.1920.1040" timestamp="1601832361515" />
     <state width="1897" height="268" key="GridCell.Tab.0.center/0.38.1920.973@0.38.1920.973" timestamp="1601824144244" />
-    <state width="1897" height="268" key="GridCell.Tab.0.center/0.44.1920.967@0.44.1920.967" timestamp="1601829251391" />
-    <state width="936" height="245" key="GridCell.Tab.0.left" timestamp="1601832361515">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1897" height="332" key="GridCell.Tab.0.center/0.44.1920.967@0.44.1920.967" timestamp="1601901117900" />
+    <state width="1897" height="332" key="GridCell.Tab.0.left" timestamp="1601901117900">
+      <screen x="0" y="44" width="1920" height="967" />
     </state>
     <state width="936" height="245" key="GridCell.Tab.0.left/0.0.1920.1040@0.0.1920.1040" timestamp="1601832361515" />
     <state width="1897" height="268" key="GridCell.Tab.0.left/0.38.1920.973@0.38.1920.973" timestamp="1601824144244" />
-    <state width="1897" height="268" key="GridCell.Tab.0.left/0.44.1920.967@0.44.1920.967" timestamp="1601829251390" />
-    <state width="936" height="245" key="GridCell.Tab.0.right" timestamp="1601832361515">
-      <screen x="0" y="0" width="1920" height="1040" />
+    <state width="1897" height="332" key="GridCell.Tab.0.left/0.44.1920.967@0.44.1920.967" timestamp="1601901117900" />
+    <state width="1897" height="332" key="GridCell.Tab.0.right" timestamp="1601901117900">
+      <screen x="0" y="44" width="1920" height="967" />
     </state>
     <state width="936" height="245" key="GridCell.Tab.0.right/0.0.1920.1040@0.0.1920.1040" timestamp="1601832361515" />
     <state width="1897" height="268" key="GridCell.Tab.0.right/0.38.1920.973@0.38.1920.973" timestamp="1601824144244" />
-    <state width="1897" height="268" key="GridCell.Tab.0.right/0.44.1920.967@0.44.1920.967" timestamp="1601829251391" />
+    <state width="1897" height="332" key="GridCell.Tab.0.right/0.44.1920.967@0.44.1920.967" timestamp="1601901117900" />
     <state width="1899" height="340" key="GridCell.Tab.1.bottom" timestamp="1601492531834">
       <screen x="0" y="0" width="1920" height="1040" />
     </state>
