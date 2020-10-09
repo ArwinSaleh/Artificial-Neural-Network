@@ -26,9 +26,9 @@ length_validation = len(validation_set)
 class TwoLayerPerceptron:
 
     def __init__(self):
-        self.M1 = 5
-        self.M2 = 5
-        self.n = 0.02  # Learning rate
+        self.M1 = 10
+        self.M2 = 10
+        self.n = 0.04  # Learning rate
         self.X = np.array([x1_u, x2_u])  # Inputs
         self.X_validation = np.array([x1_u_val, x2_u_val]).T
         self.T = np.array([t_u]).T  # Targets
@@ -59,22 +59,22 @@ class TwoLayerPerceptron:
 
     def initialize_weights(self):
         size1 = (2, self.M1)
-        self.w1 = np.random.uniform(-0.2, 0.2, size1)
+        self.w1 = np.random.uniform(0, 1, size1)
 
         size2 = (self.M1, self.M2)
-        self.w2 = np.random.uniform(-0.2, 0.2, size2)
+        self.w2 = np.random.uniform(0, 1, size2)
 
         size3 = (1, self.M2)
-        self.w3 = np.random.uniform(-0.2, 0.2, size3)
+        self.w3 = np.random.uniform(0, 1, size3)
 
     def initialize_thresholds(self):
         size1 = (1, self.M1)
-        self.t1 = np.random.uniform(-1, 1, size1)
+        self.t1 = np.zeros(size1)
 
         size2 = (1, self.M2)
-        self.t2 = np.random.uniform(-1, 1, size2)
+        self.t2 = np.zeros(size2)
 
-        self.t3 = np.random.uniform(-1, 1)
+        self.t3 = 0
 
     def compute_V_j(self):
         tmp = np.dot(self.X.T, self.w1) - self.t1
@@ -94,7 +94,7 @@ class TwoLayerPerceptron:
         self.O = np.tanh(tmp)
 
     def compute_Vj_val(self):
-        tmp = np.dot(self.w1, self.X_validation.T) - np.transpose(self.t1)
+        tmp = np.dot(self.w1.T, self.X_validation.T) - np.transpose(self.t1)
         self.Vj_val = np.tanh(tmp)
 
     def compute_Vi_val(self):
@@ -162,30 +162,21 @@ def main():
 
     maximum_epochs = 100
     current_epoch = 0
-    errors = np.zeros((1, length_validation))
     while perceptron.C >= 0.12 and current_epoch < maximum_epochs:
 
-        run = 1
-
         for i in range(0, length_training):
-
             u = np.random.randint(0, length_training)
 
             perceptron.propagate_forward()
             perceptron.propagate_backward(u)
             perceptron.train_network()
 
-            print("Run = " + str(run))
-            run += 1
+        perceptron.compute_Vj_val()
+        perceptron.compuste_Vi_val()
+        perceptron.compute_output_val()
+        perceptron.compute_classification_error()
 
-        if current_epoch % 20 == 0:
-            perceptron.compute_Vj_val()
-            perceptron.compute_Vi_val()
-            perceptron.compute_output_val()
-            perceptron.compute_classification_error()
-            errors[current_epoch] = perceptron.C
-
-            print("Currently on epoch number " + str(current_epoch * 20) + "\nValidation error = " + str(perceptron.C))
+        print("Currently on epoch number " + str(current_epoch * 20) + "\nValidation error = " + str(perceptron.C))
 
         current_epoch += 1
 
