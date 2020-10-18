@@ -6,6 +6,7 @@ import tensorflow as tf
 from tensorflow import keras
 from tensorflow.keras import layers, models, datasets
 from tensorflow.keras.datasets import mnist
+from tensorflow.python.eager.context import PhysicalDevice, device
 from tensorflow.python.keras import activations
 from tensorflow.python.keras.backend import relu, softmax
 from tensorflow.python.keras.engine import input_layer
@@ -15,7 +16,13 @@ from keras.optimizers import SGD
 from keras.utils.np_utils import to_categorical
 from sklearn.model_selection import KFold
 from matplotlib import pyplot as plt
+from statistics import mean
+from keras import backend as K
+from tensorflow.python.tf2 import enable
+import os
 
+os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"   # see issue #152
+os.environ["CUDA_VISIBLE_DEVICES"] = ""
 
 class Network1:
 
@@ -72,12 +79,16 @@ class Network1:
             test_y = self.train_y[j]
             history = net.fit(train_X, train_y, validation_data = (test_X, test_y), epochs = 60, batch_size = 8192, verbose = 0)
             _, accuracy = net.evaluate(test_X, test_y, verbose=0)
+            print("Accuracy = " + str(100 * accuracy))
             self.score_list.append(accuracy)
             self.history_list.append(history)
 
+            print("EPOCH")
+
+
         return self.history_list, self.score_list
 
-    def plot_information(self):
+    def information(self):
         for i in range(len(self.history_list)):
 
             plt.subplot(2, 1, 1)
@@ -91,18 +102,24 @@ class Network1:
             plt.plot(self.history_list[i].history['val_accuracy'], color='blue', label ='Testing data')
 
         plt.show()
-    
+
+        print('Mean accuracy: ' + str(100 * mean(self.score_list)))
+        print("Std accuracy: " + str(std(self.score_list)))
+        print("n = " + str(len(self.score_list)))
+
     def pixel_scaling(self):
 
-        trainX = self.train_X.astype('float32')
-        testX = self.test_X.astype('float32')
+        train = self.train_X.astype('float32')
+        test = self.test_X.astype('float32')
 
-        return trainX/255.0, testX/255.0
+        return train/255.0, test/255.0
 
 
-if __name__ == "__main__":
+def main():
     net = Network1()
-    train_X, train_y, test_X, test_y = net.load_mnist()
-    train_X, train_y = net.pixel_scaling()
-    history_list, score_list = net.evaluate()
-    net.plot_information()
+    net.restructure_data()
+    net.train_X, net.test_X = net.pixel_scaling()
+    net.history_list, net.score_list = net.evaluate()
+    net.information()
+
+main()
