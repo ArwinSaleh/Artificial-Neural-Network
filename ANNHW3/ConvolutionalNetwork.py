@@ -1,6 +1,4 @@
-import imp
-import re
-from numpy.lib import tests
+
 from sklearn.utils import shuffle
 import tensorflow as tf
 from tensorflow import keras
@@ -16,52 +14,44 @@ from keras.optimizers import SGD
 from keras.utils.np_utils import to_categorical
 from sklearn.model_selection import KFold
 from matplotlib import pyplot as plt
-from statistics import mean
-from keras import backend as K
-from tensorflow.python.tf2 import enable
+from numpy import mean, std
+
+
 
 class Network1:
 
     def __init__(self):
         (self.train_X, self.train_y), (self.test_X, self.test_y) = mnist.load_data() 
         self.image_input_layer = layers.InputLayer(input_shape=(28, 28, 1))
-        self.convolution2d_layer = layers.Conv2D(20, strides=(1,1), activation='relu', padding='valid', kernel_size=(5, 5))
+        self.convolution2d_layer = layers.Conv2D(20, strides=(1,1), activation='relu', padding='valid', kernel_size=(5, 5), kernel_initializer='he_uniform')
         self.max_pooling2d_layer = layers.MaxPooling2D(strides=(2,2), pool_size=(2, 2))
-        self.fully_connected_layer1 = layers.Dense(100, activation='relu')
-        self.fully_connected_layer2 = layers.Dense(10, activation='softmax')
-        self.classification_layer = layers.Dense(10)
+        self.fully_connected_layer1 = layers.Dense(100, activation='relu', kernel_initializer='he_uniform')
+        self.fully_connected_layer2 = layers.Dense(10, activation='softmax', )
         self.optimizer = SGD(momentum = 0.9, lr=0.001)
         self.history_list = list()
         self.score_list = list()
 
     def define_network(self):
-        self.network1 = models.Sequential()
-        self.network1.add(self.image_input_layer)
-        self.network1.add(self.convolution2d_layer)
-        self.network1.add(BatchNormalization())
-        self.network1.add(self.max_pooling2d_layer)
-        self.network1.add(Flatten())
-        self.network1.add(self.fully_connected_layer1)
-        self.network1.add(BatchNormalization())
-        self.network1.add(self.fully_connected_layer2)
-        self.network1.add(self.classification_layer)
-        self.network1.compile(metrics=['accuracy'], loss='categorical_crossentropy', optimizer=self.optimizer)
-        return self.network1
+        network1 = models.Sequential()
+        network1.add(self.image_input_layer)
+        network1.add(self.convolution2d_layer)
+        network1.add(self.max_pooling2d_layer)
+        network1.add(Flatten())
+        network1.add(self.fully_connected_layer1)
+        network1.add(self.fully_connected_layer2)
+        network1.compile(metrics=['accuracy'], loss='categorical_crossentropy', optimizer=self.optimizer)
+        return network1
     
     def summary(self):
         print(self.network1.summary())
 
-    def restructure_data(self):
+    def load_mnist(self):
         training_shape = (self.train_X.shape[0], 28, 28, 1) # Single channel shape
         testing_shape = (self.test_X.shape[0], 28, 28, 1)
         self.train_X = self.train_X.reshape(training_shape)
         self.test_X = self.test_X.reshape(testing_shape)
         self.train_y = to_categorical(self.train_y)
         self.test_y = to_categorical(self.test_y)
-
-    def load_mnist(self):
-        self.restructure_data()
-        return self.train_X, self.train_y, self.test_X, self.test_y
 
     def evaluate(self):
 
@@ -80,9 +70,6 @@ class Network1:
             self.history_list.append(history)
 
             print("EPOCH")
-
-
-        return self.history_list, self.score_list
 
     def information(self):
         for i in range(len(self.history_list)):
@@ -108,14 +95,15 @@ class Network1:
         train = self.train_X.astype('float32')
         test = self.test_X.astype('float32')
 
-        return train/255.0, test/255.0
+        self.train_X = train / 255.0
+        self.test_X = test / 255.0
 
 
 def main():
     net = Network1()
-    net.restructure_data()
-    net.train_X, net.test_X = net.pixel_scaling()
-    net.history_list, net.score_list = net.evaluate()
+    net.load_mnist()
+    net.pixel_scaling()
+    net.evaluate()
     net.information()
 
 main()
