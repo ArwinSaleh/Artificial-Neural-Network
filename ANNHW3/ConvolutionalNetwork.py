@@ -19,10 +19,6 @@ from matplotlib import pyplot as plt
 from statistics import mean
 from keras import backend as K
 from tensorflow.python.tf2 import enable
-import os
-
-os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"   # see issue #152
-os.environ["CUDA_VISIBLE_DEVICES"] = ""
 
 class Network1:
 
