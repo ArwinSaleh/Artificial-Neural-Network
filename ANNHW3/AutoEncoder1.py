@@ -18,8 +18,8 @@ class AutoEncoder:
         self.auto_encoder = keras.Model(self.image_input_layer, self.fully_connected_layer3)
         self.encoder = keras.Model(self.image_input_layer, self.fully_connected_layer1)
 
-        input_encode = keras.Input(shape=(2,))
-        layer_decode = self.auto_encoder.layers[-1]
+        input_encode = keras.Input(shape=(50,))     # 50? 2?
+        layer_decode = self.auto_encoder.layers[-1]     # Bug
         self.decoder = keras.Model(input_encode, layer_decode(input_encode))
 
     def load_mnist(self):
