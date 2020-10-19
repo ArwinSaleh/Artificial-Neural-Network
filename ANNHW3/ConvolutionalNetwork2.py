@@ -91,6 +91,9 @@ class Network2:
         print('Mean accuracy: ' + str(100 * mean(self.score_list)))
         print("Std accuracy: " + str(std(self.score_list)))
         print("n = " + str(len(self.score_list)))
+        
+        plt.boxplot(self.score_list)
+        plt.show
 
     def pixel_scaling(self):
 
