@@ -1,13 +1,6 @@
-
-from sklearn.utils import shuffle
 import tensorflow as tf
-from tensorflow import keras
-from tensorflow.keras import layers, models, datasets
+from tensorflow.keras import layers, models
 from tensorflow.keras.datasets import mnist
-from tensorflow.python.eager.context import PhysicalDevice, device
-from tensorflow.python.keras import activations
-from tensorflow.python.keras.backend import relu, softmax
-from tensorflow.python.keras.engine import input_layer
 from tensorflow.python.keras.layers.core import Flatten
 from tensorflow.python.keras.layers.normalization import BatchNormalization
 from keras.optimizers import SGD
@@ -16,7 +9,8 @@ from sklearn.model_selection import KFold
 from matplotlib import pyplot as plt
 from numpy import mean, std
 
-
+gpus = tf.config.experimental.list_physical_devices('GPU')
+tf.config.experimental.set_memory_growth(gpus[0], True)
 
 class Network2:
 
@@ -27,7 +21,7 @@ class Network2:
         self.max_pooling2d_layer1 = layers.MaxPooling2D(strides=(2,2), pool_size=(2, 2))
         self.convolution2d_layer2 = layers.Conv2D(30, strides=(1,1), kernel_size=(3,3), padding='valid', activation='relu')
         self.max_pooling2d_layer2 = layers.MaxPooling2D(strides=(2,2), pool_size=(2,2))
-        self.convolution2d_layer3 = layers.Conv2D(50, strides=(1,1), padding='valid', kernel_size=(3,3), activation='relu')
+        self.convolution2d_layer3 = layers.Conv2D(0, strides=(1,1), padding='valid', kernel_size=(3,3), activation='relu')
         self.fully_connected_layer = layers.Dense(10, activation='softmax', kernel_initializer='he_uniform')
         self.optimizer = SGD(momentum = 0.9, lr=0.01)
         self.history_list = list()
@@ -67,11 +61,9 @@ class Network2:
             test_y = self.train_y[j]
             history = net.fit(train_X, train_y, validation_data = (test_X, test_y), epochs = 60, batch_size = 8192, verbose = 0)
             _, accuracy = net.evaluate(test_X, test_y, verbose=0)
-            print("Accuracy = " + str(100 * accuracy))
+            print("\nAccuracy = " + str(100 * accuracy))
             self.score_list.append(accuracy)
             self.history_list.append(history)
-
-            print("EPOCH")
 
     def information(self):
         for i in range(len(self.history_list)):
@@ -91,9 +83,10 @@ class Network2:
         print('Mean accuracy: ' + str(100 * mean(self.score_list)))
         print("Std accuracy: " + str(std(self.score_list)))
         print("n = " + str(len(self.score_list)))
-        
+
+    def plot_mean(self):
         plt.boxplot(self.score_list)
-        plt.show
+        plt.show()
 
     def pixel_scaling(self):
 
@@ -110,5 +103,6 @@ def main():
     net.pixel_scaling()
     net.evaluate()
     net.information()
+    net.plot_mean()
 
 main()

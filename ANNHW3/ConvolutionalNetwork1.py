@@ -1,22 +1,15 @@
-
-from sklearn.utils import shuffle
 import tensorflow as tf
-from tensorflow import keras
-from tensorflow.keras import layers, models, datasets
+from tensorflow.keras import layers, models
 from tensorflow.keras.datasets import mnist
-from tensorflow.python.eager.context import PhysicalDevice, device
-from tensorflow.python.keras import activations
-from tensorflow.python.keras.backend import relu, softmax
-from tensorflow.python.keras.engine import input_layer
 from tensorflow.python.keras.layers.core import Flatten
-from tensorflow.python.keras.layers.normalization import BatchNormalization
 from keras.optimizers import SGD
 from keras.utils.np_utils import to_categorical
 from sklearn.model_selection import KFold
 from matplotlib import pyplot as plt
 from numpy import mean, std
 
-
+gpus = tf.config.experimental.list_physical_devices('GPU')
+tf.config.experimental.set_memory_growth(gpus[0], True)
 
 class Network1:
 
@@ -69,8 +62,6 @@ class Network1:
             self.score_list.append(accuracy)
             self.history_list.append(history)
 
-            print("EPOCH")
-
     def information(self):
         for i in range(len(self.history_list)):
 
@@ -83,12 +74,16 @@ class Network1:
             plt.title('Accuracy')
             plt.plot(self.history_list[i].history['accuracy'], color='orange', label='Training data')
             plt.plot(self.history_list[i].history['val_accuracy'], color='blue', label ='Testing data')
-
+        
         plt.show()
 
         print('Mean accuracy: ' + str(100 * mean(self.score_list)))
         print("Std accuracy: " + str(std(self.score_list)))
         print("n = " + str(len(self.score_list)))
+
+    def plot_mean(self):
+        plt.boxplot(self.score_list)
+        plt.show()
 
     def pixel_scaling(self):
 
@@ -105,5 +100,6 @@ def main():
     net.pixel_scaling()
     net.evaluate()
     net.information()
+    net.plot_mean()
 
 main()
