@@ -1,9 +1,12 @@
-import keras
-from keras import layers
-from keras.datasets import mnist
-from keras.callbacks import TensorBoard
+from tensorflow import keras
+from tensorflow.keras import layers
+from tensorflow.keras.datasets import mnist
+from tensorflow.keras.callbacks import TensorBoard
 import numpy as np
 import matplotlib.pyplot as plt
+
+import tensorflow as tf
+tf.config.list_physical_devices('GPU')
 
 
 class AutoEncoder:
@@ -18,7 +21,7 @@ class AutoEncoder:
         self.auto_encoder = keras.Model(self.image_input_layer, self.fully_connected_layer3)
         self.encoder = keras.Model(self.image_input_layer, self.fully_connected_layer1)
 
-        input_encode = keras.Input(shape=(50,))     # 50? 2?
+        input_encode = keras.Input(shape=(2,))     # 50? 2?
         layer_decode = self.auto_encoder.layers[-1]     # Bug
         self.decoder = keras.Model(input_encode, layer_decode(input_encode))
 
