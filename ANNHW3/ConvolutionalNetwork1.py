@@ -16,10 +16,10 @@ class Network1:
     def __init__(self):
         (self.train_X, self.train_y), (self.test_X, self.test_y) = mnist.load_data() 
         self.image_input_layer = layers.InputLayer(input_shape=(28, 28, 1))
-        self.convolution2d_layer = layers.Conv2D(20, strides=(1,1), activation='relu', padding='valid', kernel_size=(5, 5), kernel_initializer='he_uniform')
-        self.max_pooling2d_layer = layers.MaxPooling2D(strides=(2,2), pool_size=(2, 2))
+        self.convolution2d_layer = layers.Conv2D(20, strides=(1,1), activation='relu', padding='same', kernel_size=(5, 5), kernel_initializer='he_uniform')
+        self.max_pooling2d_layer = layers.MaxPooling2D(strides=(2,2), pool_size=(2, 2), padding='valid')
         self.fully_connected_layer1 = layers.Dense(100, activation='relu', kernel_initializer='he_uniform')
-        self.fully_connected_layer2 = layers.Dense(10, activation='softmax', )
+        self.fully_connected_layer2 = layers.Dense(10, activation='softmax')
         self.optimizer = SGD(momentum = 0.9, lr=0.001)
         self.history_list = list()
         self.score_list = list()

@@ -17,11 +17,11 @@ class Network2:
     def __init__(self):
         (self.train_X, self.train_y), (self.test_X, self.test_y) = mnist.load_data() 
         self.image_input_layer = layers.InputLayer(input_shape=(28, 28, 1))
-        self.convolution2d_layer1 = layers.Conv2D(20, strides=(1,1), activation='relu', padding='valid', kernel_size=(3, 3), kernel_initializer='he_uniform')
-        self.max_pooling2d_layer1 = layers.MaxPooling2D(strides=(2,2), pool_size=(2, 2))
-        self.convolution2d_layer2 = layers.Conv2D(30, strides=(1,1), kernel_size=(3,3), padding='valid', activation='relu')
-        self.max_pooling2d_layer2 = layers.MaxPooling2D(strides=(2,2), pool_size=(2,2))
-        self.convolution2d_layer3 = layers.Conv2D(0, strides=(1,1), padding='valid', kernel_size=(3,3), activation='relu')
+        self.convolution2d_layer1 = layers.Conv2D(20, strides=(1,1), activation='relu', padding='same', kernel_size=(3, 3), kernel_initializer='he_uniform')
+        self.max_pooling2d_layer1 = layers.MaxPooling2D(strides=(2,2), pool_size=(2, 2), padding='valid')
+        self.convolution2d_layer2 = layers.Conv2D(30, strides=(1,1), kernel_size=(3,3), padding='same', activation='relu')
+        self.max_pooling2d_layer2 = layers.MaxPooling2D(strides=(2,2), pool_size=(2,2), padding='valid')
+        self.convolution2d_layer3 = layers.Conv2D(0, strides=(1,1), padding='same', kernel_size=(3,3), activation='relu')
         self.fully_connected_layer = layers.Dense(10, activation='softmax', kernel_initializer='he_uniform')
         self.optimizer = SGD(momentum = 0.9, lr=0.01)
         self.history_list = list()
@@ -59,7 +59,7 @@ class Network2:
             train_y = self.train_y[i]
             test_X = self.train_X[j]
             test_y = self.train_y[j]
-            history = net.fit(train_X, train_y, validation_data = (test_X, test_y), epochs = 60, batch_size = 8192, verbose = 0)
+            history = net.fit(train_X, train_y, validation_data = (test_X, test_y), epochs = 30, batch_size = 8192, verbose = 0)
             _, accuracy = net.evaluate(test_X, test_y, verbose=0)
             print("\nAccuracy = " + str(100 * accuracy))
             self.score_list.append(accuracy)
